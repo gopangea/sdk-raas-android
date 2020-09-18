@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Users/carloshernandez/Desktop/Repo/RaasCardTokenizerAndroid/RaaSCardTokenizerAndroidExample/RaasCardTokenizer/build/intermediates/res/merged/release/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_1.xml",
+        "source": "/Users/carloshernandez/.gradle/caches/transforms-2/files-2.1/035e79feac643ff23f2c9730c699e50a/appcompat-1.2.0/res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/Users/carloshernandez/Desktop/Repo/RaasCardTokenizerAndroid/RaaSCardTokenizerAndroidExample/RaasCardTokenizer/build/intermediates/res/merged/release/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml",
+        "source": "/Users/carloshernandez/.gradle/caches/transforms-2/files-2.1/035e79feac643ff23f2c9730c699e50a/appcompat-1.2.0/res/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/Users/carloshernandez/Desktop/Repo/RaasCardTokenizerAndroid/RaaSCardTokenizerAndroidExample/RaasCardTokenizer/build/intermediates/res/merged/release/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_0.xml",
+        "source": "/Users/carloshernandez/.gradle/caches/transforms-2/files-2.1/035e79feac643ff23f2c9730c699e50a/appcompat-1.2.0/res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/Users/carloshernandez/Desktop/Repo/RaasCardTokenizerAndroid/RaaSCardTokenizerAndroidExample/RaasCardTokenizer/build/intermediates/res/merged/release/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml",
+        "source": "/Users/carloshernandez/.gradle/caches/transforms-2/files-2.1/035e79feac643ff23f2c9730c699e50a/appcompat-1.2.0/res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "/Users/carloshernandez/Desktop/Repo/RaasCardTokenizerAndroid/RaaSCardTokenizerAndroidExample/RaasCardTokenizer/build/intermediates/res/merged/release/interpolator/btn_radio_to_on_mtrl_animation_interpolator_0.xml",
+        "source": "/Users/carloshernandez/.gradle/caches/transforms-2/files-2.1/035e79feac643ff23f2c9730c699e50a/appcompat-1.2.0/res/interpolator/btn_radio_to_on_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/Users/carloshernandez/Desktop/Repo/RaasCardTokenizerAndroid/RaaSCardTokenizerAndroidExample/RaasCardTokenizer/build/intermediates/res/merged/release/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml",
+        "source": "/Users/carloshernandez/.gradle/caches/transforms-2/files-2.1/035e79feac643ff23f2c9730c699e50a/appcompat-1.2.0/res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "/Users/carloshernandez/Desktop/Repo/RaasCardTokenizerAndroid/RaaSCardTokenizerAndroidExample/RaasCardTokenizer/build/intermediates/res/merged/release/interpolator/fast_out_slow_in.xml",
+        "source": "/Users/carloshernandez/.gradle/caches/transforms-2/files-2.1/035e79feac643ff23f2c9730c699e50a/appcompat-1.2.0/res/interpolator/fast_out_slow_in.xml"
+    }
+]
