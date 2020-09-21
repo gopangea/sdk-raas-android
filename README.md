@@ -83,7 +83,7 @@ Pangea RaaS Android sdk must also be used for generating a temporary token repre
 ```
 mPangea.createToken(card: CardInformation, callBack: CallBack)
 ```
-The structure of Card information is:
+**The structure of Card information is:**
 
 ```
 data class CardInformation(
@@ -101,11 +101,34 @@ data class CardInformation(
   vsjavj9MxRZ3ubOFLNdh8SJ3GmVgRMndxvJGKAVAeURP4eGFK9btnLan9Kzt6BXcFQIDAQAB"
   ```
 
-  - partnerIdentifier - This information is provided by pangea, this is the name of the shop
+  - partnerIdentifier -  This is the name of the shop
   - cardNumber - A valid card number, this number will be encryped and send to the pangea server
   - cvv -  A cvv number, this number will be encryped and send to the pangea server
-
+  
 You’ll have a different public key for both sandbox and production. The partnerIdentifier will be the same in both environments and will be assigned to you.
+
+**CallBack interface**
+
+This interface will let you retrive the tocken from pagea when the service call is completed, it has two methods
+  - fun onResponse(tokenResponse: TokenResponse)
+  - fun onFailure(tokenResponse: TokenResponse, throwable: Throwable?)
+
+TokenResponse is just a wrapper for a String
+
+You can use something similar to this:
+  ```
+ mPangea.createToken(cardInformation, object : CallBack {
+            override fun onResponse(tokenResponse: TokenResponse) {
+                //Valid answer from the server
+                Log.d(TAG, "onResponse: The token is; ${tokenResponse.token}" )
+            }
+            override fun onFailure(tokenResponse: TokenResponse, throwable: Throwable?) {
+                //Error answer/No Answer from the server
+                Log.d(TAG, "onResponse: The token is; ${tokenResponse.token}" )
+                Log.e(TAG, "the error is ${throwable?.localizedMessage}" )
+            }
+        })
+```
 
 FAQs
 
