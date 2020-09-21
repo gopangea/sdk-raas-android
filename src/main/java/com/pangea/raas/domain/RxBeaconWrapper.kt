@@ -36,7 +36,7 @@ class RxBeaconWrapper(
     }
 
     //version 1.3.0 of riskified doesn't have this method only 1.3.1 and above
-    override fun rCookie(): String = rxBeacon.rCookie()
+    //override fun rCookie(): String = rxBeacon.rCookie()
     //override fun rCookie(): String = ""
 
     override fun removeLocationUpdates() {

@@ -20,9 +20,10 @@ open class Pangea private constructor() : RxBeaconOperations {
     companion object {
         private const val TAG = "Pangea"
 
-        fun createSession(context: Context, debugInfo: Boolean): Pangea {
+        fun createSession(context: Context, debugInfo: Boolean, pangeaSessionID: String): Pangea {
             return Pangea().apply {
-                pangeaSessionId = createUUID()
+                //if(pangeaSessionID == ""){ pangeaSessionId = createUUID()}
+                pangeaSessionId = pangeaSessionID
                 this.debugInfo = debugInfo
                 rxBeaconWrapper = RxBeaconWrapper(
                     context = context,
@@ -97,28 +98,6 @@ open class Pangea private constructor() : RxBeaconOperations {
 
     }
 
-    //this method uses a third party library named: org.bouncycastle, this libraries size are up 4 mb:
-    //libs/bcpkix-jdk15to18-166.jar and libs/bcprov-ext-jdk15to18-166.jar, that's why it was replaced for cryptoUtils
-//    private fun encrypt(publicKey: String, text: String): String {
-//        var encrypted = ""
-//        try {
-//            //converting the string public key to byte array
-//            val reader = PemReader(StringReader(publicKey))
-//            val pemObject = reader.readPemObject()
-//            val keyBytes: ByteArray = pemObject.content
-//            val keySpec: EncodedKeySpec = X509EncodedKeySpec(keyBytes)
-//            val keyFactory = KeyFactory.getInstance("RSA")
-//            val key = keyFactory.generatePublic(keySpec)
-//            //encrypt
-//            val cipher = Cipher.getInstance(KEY_ALGORITHM)
-//            cipher.init(Cipher.ENCRYPT_MODE, key)
-//            val cipherData: ByteArray = cipher.doFinal(text.toByteArray())
-//            encrypted = Base64.encodeToString(cipherData, Base64.NO_WRAP)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//        return encrypted
-//    }
 
     private fun getToken(card: CardInformation, requestId: String, callBack: CallBack) {
         val encryptedCardNumber: String
@@ -174,7 +153,7 @@ open class Pangea private constructor() : RxBeaconOperations {
         rxBeaconWrapper.logSensitiveDeviceInfo()
     }
 
-    override fun rCookie(): String = rxBeaconWrapper.rCookie()
+    //override fun rCookie(): String = rxBeaconWrapper.rCookie()
 
 
     override fun removeLocationUpdates() {
