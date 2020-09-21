@@ -109,7 +109,7 @@ You’ll have a different public key for both sandbox and production. The partne
 
 **CallBack interface**
 
-This interface will let you retrive the tocken from pagea when the service call is completed, it has two methods
+This interface will let you retrieve the token from pagea when the service call is completed, it has two methods
   - fun onResponse(tokenResponse: TokenResponse)
   - fun onFailure(tokenResponse: TokenResponse, throwable: Throwable?)
 
