@@ -2,7 +2,7 @@ package com.pangea.raas.data.models
 
 import com.google.gson.annotations.Expose
 
-data class TokenRequest(
+internal data class TokenRequest(
     @Expose
     var encryptedCardNumber: String = "",
     @Expose

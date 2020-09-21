@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-object RetrofitClient {
+internal object RetrofitClient {
     private const val TAG = "RetrofitClient"
     private const val BASE_URL = "https://api.pangea-raas-integration.com/raas/v1/"
 

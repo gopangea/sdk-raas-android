@@ -6,7 +6,7 @@ import com.riskified.android_sdk.RiskifiedBeaconMain
 import com.riskified.android_sdk.RiskifiedBeaconMainInterface
 
 
-class RxBeaconWrapper(
+internal class RxBeaconWrapper(
     context: Context,
     sessionId: String,
     debugInfo: Boolean,

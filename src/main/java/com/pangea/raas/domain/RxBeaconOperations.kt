@@ -1,7 +1,7 @@
 package com.pangea.raas.domain
 
 
-interface RxBeaconOperations {
+internal interface RxBeaconOperations {
     //fun startBeacon()
     fun updateSessionToken(sessionId: String)
     fun logRequest(url:String)

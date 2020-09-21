@@ -10,7 +10,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 
-interface TokenApi {
+internal interface TokenApi {
     @Headers("Accept: application/json")
     @POST("tokenization/card")
     fun postTemporaryToken(@Body tokenRequest: TokenRequest):Call<TokenResponse>
