@@ -32,14 +32,32 @@ minSdkVersion >= 21
 * Add the following line to your app's build.gradle file, under the dependencies
 section:
 ```
-implementation ''
+implementation 'com.github.gopangea:sdk-raas-android:currentVersion'
 ```
-
-* Perform a clean build (using Android Studio or in the terminal: 
+* Add it in your root build.gradle at the end of repositories:
 ```
-./gradlew clean build)
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
-
+* Add the following line to your app's build.gradle file, inside of the android section :
+```
+compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+```
+* Perform a clean build using Android Studio or in the terminal: 
+```
+./gradlew clean build
+```
 
 ### Implementation:
 
