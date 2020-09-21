@@ -62,7 +62,7 @@ compileOptions {
 
 ### Implementation:
 
-1. Declare de intance and initialize the pangea Session at the end of your main activity's onCreate() method:
+1. Declare the intance and initialize the pangea Session at the end of your main activity's onCreate() method:
 ```
 private lateinit var mPangea: Pangea
 mPangea = Pangea.createSession(context = applicationContext,  debugInfo = false, pangeaSessionID = "333333333333333333")
