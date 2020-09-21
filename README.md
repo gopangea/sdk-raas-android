@@ -149,7 +149,7 @@ You can use something similar to this:
         })
 ```
 
-FAQs
+### FAQs
 
 Q: Does the SDK require any external frameworks or additional permissions from the user?
 * The SDK makes use of 2 lightweight Google Play Services libraries (ads-identifer
