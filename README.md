@@ -9,7 +9,7 @@
 The Mobile SDK is analogous to [Pangea's Javascript](https://connect-raas-api.pangeamoneytransfer.com/?java#pangea-js-library) code used for fraud review enhancement on the browser and Funding card tokenization.
 
 Pangea requires the use of our SDK to mitigate fraud and to securely collect debit card information for payment. 
-Include the this library in your android application using the following instrucctions.
+Include this library in your android application using the following instructions.
 
 
 **To be able to use Pangea RaaS SDK in your application, Pangea must add your hostname to the CORS whitelist.**
