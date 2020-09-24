@@ -81,7 +81,7 @@ mPangea.getSessionId()
 ```
 mPangea.updateSessionToken("newToken");
 ```
-4. Notify the beacon on each relevant HTTP request from the app:
+4. Notify to pangea on each relevant HTTP request from the app:
 ```
 mPangea.logRequest("https://<request URL>");
 ```
