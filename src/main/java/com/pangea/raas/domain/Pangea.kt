@@ -43,7 +43,7 @@ open class Pangea private constructor() : RxBeaconOperations {
         }
 
         private const val ERROR_ENCRYPTION_MESSAGE =
-            "Encryption fails, invalid public key, the format for your public key should be: \n -----BEGIN PUBLIC KEY-----\n" + "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmyq5BMXtv1VWu2XSfzWP\n" + "sKvyxIzFQoyz59DsGUpaePjIznI+0ioCUeuEBCrcr8i/tFcmp0af88ga9y5vezk9\n" + "4yZKmN1+oEa51wlFu+jtX9X6bEDF8UZAq3u4xOoI1VGVW1b0oh9NEMSZXemL974A\n" + "LoQv6Lc5LZ6KfgXTm8Hu71G5gAgsvPizVGbyLtsG1Rd1Nye8q59ai14ovV/ISlKI\n" + "QgPs+RCWgwSd6NjrvOv9gWPnwkjc59Z46kiTgHv3KNszr7sBY1Cdnd4gGYrDMyU0\n" + "4m9v1+UW24syxcFKyyivPf3Wjxp73tSerSRFWQvUPBSvs+cbjf866hCqeFKh+XUC\n" + "AwIDAQAB\n" + "-----END PUBLIC KEY-----\n or this one: \n" + "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmyq5BMXtv1VWu2XSfzWP" + "sKvyxIzFQoyz59DsGUpaePjIznI+0ioCUeuEBCrcr8i/tFcmp0af88ga9y5vezk9" + "4yZKmN1+oEa51wlFu+jtX9X6bEDF8UZAq3u4xOoI1VGVW1b0oh9NEMSZXemL974A" + "LoQv6Lc5LZ6KfgXTm8Hu71G5gAgsvPizVGbyLtsG1Rd1Nye8q59ai14ovV/ISlKI" + "QgPs+RCWgwSd6NjrvOv9gWPnwkjc59Z46kiTgHv3KNszr7sBY1Cdnd4gGYrDMyU0" + "4m9v1+UW24syxcFKyyivPf3Wjxp73tSerSRFWQvUPBSvs+cbjf866hCqeFKh+XUC" + "AwIDAQAB"
+            "Encryption fails, invalid public key, the format for your public key should be like this: \"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmyq5BMXtv1VWu2XSfzWPsKvyxIzFQoyz59DsGUpaePjIznI+0ioCUeuEBCrcr8i/tFcmp0af88ga9y5vezk94yZKmN1+oEa51wlFu+jtX9X6bEDF8UZAq3u4xOoI1VGVW1b0oh9NEMSZXemL974ALoQv6Lc5LZ6KfgXTm8Hu71G5gAgsvPizVGbyLtsG1Rd1Nye8q59ai14ovV/ISlKIQgPs+RCWgwSd6NjrvOv9gWPnwkjc59Z46kiTgHv3KNszr7sBY1Cdnd4gGYrDMyU04m9v1+UW24syxcFKyyivPf3Wjxp73tSerSRFWQvUPBSvs+cbjf866hCqeFKh+XUCAwIDAQAB\""
     }
 
     fun getSessionId(): String {
