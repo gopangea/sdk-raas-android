@@ -16,15 +16,24 @@ open class Pangea private constructor() : RxBeaconOperations {
     private var pangeaSessionId = ""
     private lateinit var rxBeaconWrapper: RxBeaconOperations
     private var debugInfo: Boolean = false //by default the class has the debug info turned off
+    private lateinit var environment:Environment
 
     companion object {
         private const val TAG = "Pangea"
 
-        fun createSession(context: Context, debugInfo: Boolean, pangeaSessionID: String): Pangea {
+        enum class Environment {
+            PRODUCTION,
+            DEV,
+            INTEGRATION,
+        }
+
+
+        fun createSession(context: Context, debugInfo: Boolean, pangeaSessionID: String, environment: Environment): Pangea {
             return Pangea().apply {
                 //if(pangeaSessionID == ""){ pangeaSessionId = createUUID()}
-                pangeaSessionId = pangeaSessionID
+                this.pangeaSessionId = pangeaSessionID
                 this.debugInfo = debugInfo
+                this.environment = environment
                 rxBeaconWrapper = RxBeaconWrapper(
                     context = context,
                     sessionId = pangeaSessionId,
@@ -116,7 +125,7 @@ open class Pangea private constructor() : RxBeaconOperations {
             requestId = requestId
         )
 
-        val tokenApi = RetrofitClient.initRetrofitInstance(debugInfo).buildService(TokenApi::class.java)
+        val tokenApi = RetrofitClient.initRetrofitInstance(environment,debugInfo).buildService(TokenApi::class.java)
         tokenApi?.postTemporaryToken(tokenRequest)?.enqueue(object : Callback<TokenResponse> {
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if (response.isSuccessful) {
