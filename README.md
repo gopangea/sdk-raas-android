@@ -65,12 +65,13 @@ compileOptions {
 1. Declare the intance and initialize the pangea Session at the end of your main activity's onCreate() method:
 ```
 private lateinit var mPangea: Pangea
-mPangea = Pangea.createSession(context = applicationContext,  debugInfo = false, pangeaSessionID = "333333333333333333")
+mPangea = Pangea.createSession(context = applicationContext,  debugInfo = false, pangeaSessionID = "333333333333333333", environment = Environment.INTEGRATION)
 ```
 * createSession() arguments:
+  - context - Application Context.
   - pangeaSessionID - Unique String identifier of the user's current session in the app. The same identifier is passed by your backend to Pangea.
   - debugInfo - Boolean parameter that enables pangea logging for debugging.
-  - context - Application Context.
+  - environment - Use it to point to the desired environment, there are three: *PRODUCTION*, *DEV* and *INTEGRATION*
   
 2. if you need to retrive the session from mPangea use the following function:
 ```
