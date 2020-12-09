@@ -19,6 +19,7 @@ internal object RetrofitClient {
     fun initRetrofitInstance(environment: Environment, debugInfo:Boolean):RetrofitClient {
         this.debugInfo = debugInfo
         val clientHttp = OkHttpClient.Builder()
+        clientHttp.addInterceptor(UserAgentInterceptor())
         if (debugInfo){
             val httpLoggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             clientHttp.addInterceptor(httpLoggingInterceptor)
@@ -44,7 +45,7 @@ internal object RetrofitClient {
     init {
         environmentMap.clear()
         environmentMap[Environment.PRODUCTION] = "https://api.pangea-raas.com/raas/v1/"
-        environmentMap[Environment.DEV] = "https://api.pangea-raas-dev.com/raas/v1"
+        environmentMap[Environment.DEV] = "https://api.pangea-raas-dev.com/raas/v1/"
         environmentMap[Environment.INTEGRATION] = "https://api.pangea-raas-integration.com/raas/v1/"
     }
 
