@@ -4,13 +4,13 @@ import com.google.gson.annotations.Expose
 
 internal data class TokenRequest(
     @Expose
-    var encryptedCardNumber: String = "",
+    @JvmField var encryptedCardNumber: String = "",
     @Expose
-    var encryptedCvv: String = "",
+    @JvmField var encryptedCvv: String = "",
     @Expose
-    var partnerIdentifier: String = "",
+    @JvmField var partnerIdentifier: String = "",
     @Expose
-    var requestId: String = ""
+    @JvmField var requestId: String = ""
 )
 
 

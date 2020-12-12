@@ -1,8 +1,8 @@
 package com.pangea.raas.data.models
 
 data class CardInformation(
-    var publicKey: String,
-    var partnerIdentifier: String,
-    var cardNumber: String,
-    var cvv: String,
+        @JvmField var publicKey: String,
+        @JvmField var partnerIdentifier: String,
+        @JvmField var cardNumber: String,
+        @JvmField var cvv: String,
 )

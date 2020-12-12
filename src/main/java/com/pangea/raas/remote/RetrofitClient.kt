@@ -1,7 +1,7 @@
 package com.pangea.raas.remote
 
 import android.util.Log
-import com.pangea.raas.domain.Pangea.Companion.Environment
+import com.pangea.raas.domain.Pangea.Environment
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 

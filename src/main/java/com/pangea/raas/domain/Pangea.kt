@@ -21,13 +21,6 @@ open class Pangea private constructor() : RxBeaconOperations {
     companion object {
         private const val TAG = "Pangea"
 
-        enum class Environment {
-            PRODUCTION,
-            DEV,
-            INTEGRATION,
-        }
-
-
         fun createSession(context: Context, debugInfo: Boolean, pangeaSessionID: String, environment: Environment): Pangea {
             return Pangea().apply {
                 //if(pangeaSessionID == ""){ pangeaSessionId = createUUID()}
@@ -44,6 +37,12 @@ open class Pangea private constructor() : RxBeaconOperations {
 
         private const val ERROR_ENCRYPTION_MESSAGE =
             "Encryption fails, invalid public key, the format for your public key should be like this: \"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmyq5BMXtv1VWu2XSfzWPsKvyxIzFQoyz59DsGUpaePjIznI+0ioCUeuEBCrcr8i/tFcmp0af88ga9y5vezk94yZKmN1+oEa51wlFu+jtX9X6bEDF8UZAq3u4xOoI1VGVW1b0oh9NEMSZXemL974ALoQv6Lc5LZ6KfgXTm8Hu71G5gAgsvPizVGbyLtsG1Rd1Nye8q59ai14ovV/ISlKIQgPs+RCWgwSd6NjrvOv9gWPnwkjc59Z46kiTgHv3KNszr7sBY1Cdnd4gGYrDMyU04m9v1+UW24syxcFKyyivPf3Wjxp73tSerSRFWQvUPBSvs+cbjf866hCqeFKh+XUCAwIDAQAB\""
+    }
+
+    enum class Environment {
+        PRODUCTION,
+        DEV,
+        INTEGRATION,
     }
 
     fun getSessionId(): String {

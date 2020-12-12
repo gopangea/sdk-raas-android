@@ -5,5 +5,5 @@ import com.google.gson.annotations.Expose
 
 data class TokenResponse(
     @Expose
-    val token: String
+    @JvmField val token: String
 )
