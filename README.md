@@ -63,10 +63,19 @@ compileOptions {
 ### Implementation:
 
 1. Declare the intance and initialize the pangea Session at the end of your main activity's onCreate() method:
+* Kotlin
 ```
 private lateinit var mPangea: Pangea
-mPangea = Pangea.createSession(context = applicationContext,  debugInfo = false, pangeaSessionID = "333333333333333333", environment = Environment.INTEGRATION)
+mPangea = Pangea.createSession(context = applicationContext,  debugInfo = false, pangeaSessionID = "YOUR ID IDENTIFIER PER USER HERE 
+", environment = Environment.INTEGRATION)
 ```
+* Java
+```
+private lateinit var mPangea: Pangea
+mPangea = Pangea.Companion.createSession(getApplicationContext(),false, "YOUR ID IDENTIFIER PER USER HERE",
+                Pangea.Environment.DEV);
+```
+
 * createSession() arguments:
   - context - Application Context.
   - pangeaSessionID - Unique String identifier of the user's current session in the app. The same identifier is passed by your backend to Pangea.
