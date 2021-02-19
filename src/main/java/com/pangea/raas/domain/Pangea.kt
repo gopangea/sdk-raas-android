@@ -5,8 +5,10 @@ import android.util.Log
 import com.pangea.raas.data.models.CardInformation
 import com.pangea.raas.data.models.TokenRequest
 import com.pangea.raas.data.models.TokenResponse
+import com.pangea.raas.remote.RaaSApi
 import com.pangea.raas.remote.RetrofitClient
-import com.pangea.raas.remote.TokenApi
+import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +23,12 @@ open class Pangea private constructor() : RxBeaconOperations {
     companion object {
         private const val TAG = "Pangea"
 
-        fun createSession(context: Context, debugInfo: Boolean, pangeaSessionID: String, environment: Environment): Pangea {
+        fun createSession(
+            context: Context,
+            debugInfo: Boolean,
+            pangeaSessionID: String,
+            environment: Environment
+        ): Pangea {
             return Pangea().apply {
                 //if(pangeaSessionID == ""){ pangeaSessionId = createUUID()}
                 this.pangeaSessionId = pangeaSessionID
@@ -50,11 +57,13 @@ open class Pangea private constructor() : RxBeaconOperations {
     }
 
 
-    fun createToken(card: CardInformation, callBack: CallBack) {
+    fun createToken(card: CardInformation, callBack: CallBack<TokenResponse>) {
         thread(start = true) {
             if (!isCardNumberValid(card.cardNumber)) {
                 if (debugInfo) {
-                    Log.e(TAG, "createToken: cardNumber is not a valid card number : ${card.cardNumber} "
+                    Log.e(
+                        TAG,
+                        "createToken: cardNumber is not a valid card number : ${card.cardNumber} "
                     )
                 }
                 callBack.onFailure(TokenResponse("cardNumber is not a valid card number"), null)
@@ -107,7 +116,54 @@ open class Pangea private constructor() : RxBeaconOperations {
     }
 
 
-    private fun getToken(card: CardInformation, requestId: String, callBack: CallBack) {
+
+    private fun addSessionIDToClientInfo(jsonObject: JSONObject): JSONObject {
+        jsonObject.put("clientSessionId", getSessionId())
+        return jsonObject
+    }
+
+    private fun getEncoded64BaseString(jsonObject: JSONObject):String{
+        if(debugInfo){
+            println("object to decode: $jsonObject")
+        }
+        return CryptoUtil.get64BaseStringFromString(jsonObject.toString())
+    }
+
+    fun getClientData(callBack: CallBack<String>){
+        fetchClientInfo(callBack)
+    }
+
+    private fun fetchClientInfo(callBack: CallBack<String>){
+        val tokenApi = RetrofitClient.initRetrofitInstance(environment, debugInfo).buildService(
+            RaaSApi::class.java
+        )
+        tokenApi?.getClientSession()?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {responseBody ->
+                        val clientInfo = JSONObject(responseBody.string())
+                        val clientInfoWithSessionID = addSessionIDToClientInfo(clientInfo)
+                        val clientInfoWithSessionIDEncoded = getEncoded64BaseString(clientInfoWithSessionID)
+                        callBack.onResponse(clientInfoWithSessionIDEncoded)
+                    }
+                } else {
+                    if (debugInfo) {
+                        Log.w(TAG, "onResponse: response is not ok, code: ${response.code()} \n  responseBody: ${response.body()}")
+                    }
+                    callBack.onFailure("", Throwable(response.body().toString()))
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, throwable: Throwable) {
+                if (debugInfo) {
+                    Log.e(TAG, "onFailure, body: ${call.request().body}")
+                }
+                callBack.onFailure("", throwable)
+            }
+        })
+    }
+
+    private fun getToken(card: CardInformation, requestId: String, callBack: CallBack<TokenResponse>) {
         val encryptedCardNumber: String
         val encryptedCvv: String
         try {
@@ -124,7 +180,9 @@ open class Pangea private constructor() : RxBeaconOperations {
             requestId = requestId
         )
 
-        val tokenApi = RetrofitClient.initRetrofitInstance(environment,debugInfo).buildService(TokenApi::class.java)
+        val tokenApi = RetrofitClient.initRetrofitInstance(environment, debugInfo).buildService(
+            RaaSApi::class.java
+        )
         tokenApi?.postTemporaryToken(tokenRequest)?.enqueue(object : Callback<TokenResponse> {
             override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if (response.isSuccessful) {
@@ -135,6 +193,7 @@ open class Pangea private constructor() : RxBeaconOperations {
                     if (debugInfo) {
                         Log.w(TAG, "onResponse: response is not ok, code: ${response.code()} \n  responseBody: ${response.body()}")
                     }
+                    callBack.onFailure(TokenResponse(""), Throwable(response.body().toString()))
                 }
             }
 

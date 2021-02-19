@@ -1,12 +1,10 @@
 package com.pangea.raas.domain
 
-import com.pangea.raas.data.models.TokenResponse
 
+interface CallBack<T>{
 
-interface CallBack{
+    fun  onResponse(result: T)
 
-    fun onResponse(tokenResponse: TokenResponse)
-
-    fun onFailure(tokenResponse: TokenResponse, throwable: Throwable?)
+    fun  onFailure(result: T, throwable: Throwable?)
 
 }

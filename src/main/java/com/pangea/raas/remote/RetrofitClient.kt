@@ -44,9 +44,9 @@ internal object RetrofitClient {
 
     init {
         environmentMap.clear()
-        environmentMap[Environment.PRODUCTION] = "https://api.pangea-raas.com/raas/v1/"
-        environmentMap[Environment.DEV] = "https://api.pangea-raas-dev.com/raas/v1/"
-        environmentMap[Environment.INTEGRATION] = "https://api.pangea-raas-integration.com/raas/v1/"
+        environmentMap[Environment.PRODUCTION] = "https://api.pangea-raas.com/raas/"
+        environmentMap[Environment.DEV] = "https://api.pangea-raas-dev.com/raas/"
+        environmentMap[Environment.INTEGRATION] = "https://api.pangea-raas-integration.com/raas/"
     }
 
 

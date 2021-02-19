@@ -90,4 +90,8 @@ internal object CryptoUtil {
         val kf = KeyFactory.getInstance(CRYPTO_METHOD)
         return kf.generatePrivate(keySpec)
     }
+
+    fun get64BaseStringFromString(string: String):String{
+        return Base64.encodeToString(string.toByteArray(StandardCharsets.UTF_8), Base64.NO_WRAP)
+    }
 }
