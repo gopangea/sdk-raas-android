@@ -123,7 +123,7 @@ data class CardInformation(
 )
 ```
 * CardInformation() arguments:
-  - publicKey - Unique RAS pubic key identifier of provided by Pangea, pass this argument as a String with the key only without any blank/enter/tab/etc space, a valid string could be: 
+  - publicKey - Unique RAS pubic key identifier, provided to you by Pangea, pass this argument as a String with the key only without any blank/enter/tab/etc space, a valid string could be: 
   
   ```
   "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq7BL3rzZbWx6xDmxDxozfUhoJ2xJawfKoGqBgqUa+ZTWUYUtkrCMuS3l8bKZZij4MQQmFb4vvIUJ0AoY0aVK59uxom1MEA9X89Vaz0Ctv5TNdjm7NQN3oosdtKeMd7g1fAxBXoR2XdShM9Nq0IjNHgWbbgFlq4CTKdPyG7N/M5eAnSjDOO9xIADZ9DsWGk3TgZGKbr36EJGYfT8R1E/l+/2YRLVlKf/lLGkl0LSPJ+kv4icB7i48v2GTTAyRs04oFPc9xB/JdoCxCtUmaIcy
