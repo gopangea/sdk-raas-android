@@ -69,13 +69,17 @@ open class Pangea private constructor() : RxBeaconOperations {
                 callBack.onFailure(TokenResponse("cardNumber is not a valid card number"), null)
                 return@thread
             }
-            var requestId = "0"
-            while (requestId.toLong(11) == 0L) {//if requestID is Zero
-                //On the way that this random number is produced there is a minimum probability to get zero, that's the reason of this loop
-                requestId = Math.random().toString().replace(".", "").toLong().toString(11)
-            }
-            getToken(card, requestId, callBack)
+            getToken(card, getRequestId(), callBack)
         }
+    }
+
+    private fun getRequestId(): String{
+        var requestId = "0"
+        while (requestId.toLong(11) == 0L) {//if requestID is Zero
+            //On the way that this random number is produced there is a minimum probability to get zero, that's the reason of this loop
+            requestId = Math.random().toString().replace(".", "").toLong().toString(11)
+        }
+        return requestId
     }
 
     private fun isCardNumberValid(cardNumber: String): Boolean {
