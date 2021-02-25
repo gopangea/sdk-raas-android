@@ -134,7 +134,9 @@ open class Pangea private constructor() : RxBeaconOperations {
     }
 
     fun getClientData(callBack: CallBack<String>){
-        fetchClientInfo(callBack)
+        thread(start = true) {
+            fetchClientInfo(callBack)
+        }
     }
 
     private fun fetchClientInfo(callBack: CallBack<String>){
@@ -152,7 +154,7 @@ open class Pangea private constructor() : RxBeaconOperations {
                     }
                 } else {
                     if (debugInfo) {
-                        Log.w(TAG, "onResponse: response is not ok, code: ${response.code()} \n  responseBody: ${response.body()}")
+                        Log.w(TAG, "onResponse: response is not ok, code: ${response.code()} \n  responseBody: ${response.errorBody().toString()}")
                     }
                     callBack.onFailure("", Throwable(response.body().toString()))
                 }
