@@ -1,7 +1,9 @@
 # SDK-RaaS-Android
 
 **The following guide explains how to install and implement Pangea RaaS' Mobile SDK into your application environment.** 
-- Version number: 1.0.1
+- Version number: 1.0.2
+
+## [Changelog](https://github.com/gopangea/sdk-raas-android/blob/master/CHANGELOG.md)
 
 ### Introduction
 
@@ -110,7 +112,7 @@ mPangea.removeLocationUpdates();
 Pangea RaaS Android sdk must also be used for generating a temporary token representing a sender’s funding card. Pangea retrieves the token by first encrypting the card data using your public key then sends it to Pangea’s server. You will send the temporary token to your server and finally over to the Pangea RaaS API to create a funding card. Pangea uses the temporary token to generate a permanent token with our card payments provider. The card number and cvv is never stored anywhere in Pangea. You will use the same permanent token for each transfer made with that card. The temporary token is valid for 24 hours. Upon successful generation of the temporary token, you can safely send it to your server. Then to create the funding method in the RaaS API, provide the token along with the other required fields: 
 
 ```
-mPangea.createToken(card: CardInformation, callBack: CallBack)
+mPangea.createToken(card: CardInformation, callBack: CallBack<TokenResponse>) 
 ```
 **The structure of Card information is:**
 
@@ -139,27 +141,47 @@ You’ll have a different public key for both sandbox and production. The partne
 **CallBack interface**
 
 This interface will let you retrieve the token from pagea when the service call is completed, it has two methods
-  - fun onResponse(tokenResponse: TokenResponse)
-  - fun onFailure(tokenResponse: TokenResponse, throwable: Throwable?)
-
-TokenResponse is just a wrapper for a String
+  - fun  onResponse(result: T)
+  - fun  onFailure(result: T, throwable: Throwable?)
 
 You can use something similar to this:
   ```
- mPangea.createToken(cardInformation, object : CallBack {
+ mPangea.createToken(cardInformation, object : CallBack<TokenResponse> {
             override fun onResponse(tokenResponse: TokenResponse) {
-                //Valid answer from the server
-                Log.d(TAG, "onResponse: The token is; ${tokenResponse.token}" )
+                Log.e(TAG, "onResponse: The token is; ${tokenResponse.token}" )
+                //do something with your token
             }
             override fun onFailure(tokenResponse: TokenResponse, throwable: Throwable?) {
-                //Error answer/No Answer from the server
-                Log.d(TAG, "onResponse: The token is; ${tokenResponse.token}" )
                 Log.e(TAG, "the error is ${throwable?.localizedMessage}" )
+                 //failed request
             }
         })
 ```
+TokenResponse is just a wrapper for a String
 
-### [Changelog](https://github.com/gopangea/sdk-raas-android/blob/master/CHANGELOG.md)
+**Client Session Data**
+
+From version 1.0.2 we introduced a new method to get a base64 encoded string which the RaaS partner will store in their database instead of the clientSessionId. This encoded string is a JSON object containing some platform RaaS identifiers and the client session id provided by your implementation.
+```
+mPangea.getClientData(callback :CallBack<String>)
+```
+
+This id is the same that the sessionID, if you already provided one is not necessary to provide another before calling this method, (when you create your pangea instance you pass this ID as the parameter pangeaSessionID)
+
+You can use something similar to this to retrive your encoded client session data:
+```
+pangea.getClientData(object :CallBack<String>{
+    override fun onResponse(clientInfo: String) {
+        println(clientInfo)
+        //do something with your clientInfo
+
+    }
+    override fun onFailure(result: String, throwable: Throwable?) {
+        println("failed: ${throwable?.localizedMessage}")
+          //failed request
+    }
+})
+```
 
 ### FAQs
 
