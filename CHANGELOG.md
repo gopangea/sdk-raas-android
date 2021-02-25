@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - No changes comming
 
-## [1.0.12 - 2020-02-25
+## [1.0.2] - 2020-02-25
 ### Added
 - A new method that will return a base64 encoded string which the RaaS partner will store in their database instead of the clientSessionId
 ```
