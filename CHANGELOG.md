@@ -8,6 +8,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - No changes comming
 
+## [1.0.12 - 2020-02-25
+### Added
+- A new method that will return a base64 encoded string which the RaaS partner will store in their database instead of the clientSessionId
+```
+getClientData()
+```
+### Changed
+
+- CallBack interface: This interface has chaged to a generic type, in this way can it be use to wrap any type of reponse from the pagea sdk that could be added in the future, the refactored interface is this one:
+
+```
+    fun  onResponse(result: T)
+    fun  onFailure(result: T, throwable: Throwable?)
+```
+You can use it as the same as the previous one, just adding the type of the respose you are expecting back:
+```
+mPangea.createToken(cardInformation, object : CallBack<TokenResponse> {
+            override fun onResponse(tokenResponse: TokenResponse) {
+                Log.e(TAG, "onResponse: The token is; ${tokenResponse.token}" )
+                //do something with your token
+            }
+            override fun onFailure(tokenResponse: TokenResponse, throwable: Throwable?) {
+                Log.e(TAG, "the error is ${throwable?.localizedMessage}" )
+                 //failed request
+            }
+        })
+        
+pangea.getClientData(object :CallBack<String>{
+            override fun onResponse(clientInfo: String) {
+                println(clientInfo)
+                //do something with your clientInfo
+
+            }
+            override fun onFailure(result: String, throwable: Throwable?) {
+                println("failed: ${throwable?.localizedMessage}")
+                 //failed request
+            }
+        })
+```
 ## [1.0.1] - 2020-12-12
 ### Added
 - Support for Java projects
