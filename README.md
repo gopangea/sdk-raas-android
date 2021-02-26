@@ -145,7 +145,10 @@ This interface will let you retrieve the token from pagea when the service call 
   - fun  onFailure(result: T, throwable: Throwable?)
 
 You can use something similar to this:
-  ```
+
+* Kotlin
+
+```
  mPangea.createToken(cardInformation, object : CallBack<TokenResponse> {
             override fun onResponse(tokenResponse: TokenResponse) {
                 Log.e(TAG, "onResponse: The token is; ${tokenResponse.token}" )
@@ -156,6 +159,23 @@ You can use something similar to this:
                  //failed request
             }
         })
+```
+* Java
+
+```
+mPangea.createToken(cardInformation, new CallBack<TokenResponse>() {
+          @Override
+          public void onResponse(TokenResponse tokenResponse) {
+              Log.e(TAG, "onResponse: The token is: " + tokenResponse.token);
+              //do something with your token
+          }
+
+          @Override
+          public void onFailure(TokenResponse tokenResponse, @Nullable Throwable throwable) {
+              Log.e(TAG, "the error is: " + throwable.getLocalizedMessage());
+              //failed request
+          }
+      });
 ```
 TokenResponse is just a wrapper for a String
 
@@ -168,7 +188,26 @@ mPangea.getClientData(callback :CallBack<String>)
 
 This id is the same that the sessionID, if you already provided one is not necessary to provide another before calling this method, (when you create your pangea instance you pass this ID as the parameter pangeaSessionID)
 
-You can use something similar to this to retrive your encoded client session data:
+You can use something similar to this to retrive your encoded client session data: 
+
+* Kotlin
+```
+pangea.getClientData(new CallBack<String>() {
+            @Override
+            public void onResponse(String clientInfo) {
+                System.out.println(clientInfo);
+                //do something with your clientInfo
+            }
+
+            @Override
+            public void onFailure(String result, @Nullable Throwable throwable) {
+                System.out.println("failed: " + throwable.getLocalizedMessage());
+                //failed request
+            }
+        });
+```
+
+* Java
 ```
 pangea.getClientData(object :CallBack<String>{
     override fun onResponse(clientInfo: String) {
@@ -178,10 +217,11 @@ pangea.getClientData(object :CallBack<String>{
     }
     override fun onFailure(result: String, throwable: Throwable?) {
         println("failed: ${throwable?.localizedMessage}")
-          //failed request
+        //failed request
     }
 })
 ```
+
 
 ### FAQs
 
