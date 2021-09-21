@@ -5,6 +5,7 @@ import android.util.Log
 import com.pangea.raas.data.models.CardInformation
 import com.pangea.raas.data.models.TokenRequest
 import com.pangea.raas.data.models.TokenResponse
+import com.pangea.raas.remote.ErrorDescription
 import com.pangea.raas.remote.RaaSApi
 import com.pangea.raas.remote.RetrofitClient
 import okhttp3.ResponseBody
@@ -13,6 +14,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.concurrent.thread
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.lang.StringBuilder
 
 open class Pangea private constructor() : RxBeaconOperations {
     private var pangeaSessionId = ""
@@ -77,7 +81,7 @@ open class Pangea private constructor() : RxBeaconOperations {
         var requestId = "0"
         while (requestId.toLong(11) == 0L) {//if requestID is Zero
             //On the way that this random number is produced there is a minimum probability to get zero, that's the reason of this loop
-            requestId = Math.random().toString().replace(".", "").toLong().toString(11)
+            requestId = Math.random().toString().replace(".", "").replace("E-", "").toLong().toString(11)
         }
         return requestId
     }
@@ -156,7 +160,12 @@ open class Pangea private constructor() : RxBeaconOperations {
                     if (debugInfo) {
                         Log.w(TAG, "onResponse: response is not ok, code: ${response.code()} \n  responseBody: ${response.errorBody().toString()}")
                     }
-                    callBack.onFailure("", Throwable(response.body().toString()))
+                    try {
+                        val errorDescription = getErrorDescription(response)
+                        callBack.onFailure("", Throwable(errorDescription.toString()))
+                    } catch (e: java.lang.Exception) {
+                        callBack.onFailure("", Throwable(e))
+                    }
                 }
             }
 
@@ -199,7 +208,14 @@ open class Pangea private constructor() : RxBeaconOperations {
                     if (debugInfo) {
                         Log.w(TAG, "onResponse: response is not ok, code: ${response.code()} \n  responseBody: ${response.body()}")
                     }
-                    callBack.onFailure(TokenResponse(""), Throwable(response.body().toString()))
+                    try {
+                        val errorDescription = getErrorDescription(response)
+                        callBack.onFailure(TokenResponse(""), Throwable(errorDescription.toString()))
+                    } catch (e: java.lang.Exception) {
+                        callBack.onFailure(TokenResponse(""), e)
+                    }
+
+
                 }
             }
 
@@ -210,6 +226,24 @@ open class Pangea private constructor() : RxBeaconOperations {
                 callBack.onFailure(TokenResponse(""), throwable)
             }
         })
+    }
+
+    private fun <T> getErrorDescription(response: Response<T>): ErrorDescription {
+        val errorMessage = StringBuilder()
+        val bufferedReader: BufferedReader?
+        if (response.errorBody() != null) {
+            bufferedReader = BufferedReader(InputStreamReader(response.errorBody()!!.byteStream()))
+            var eLine: String?
+            while (bufferedReader.readLine().also { eLine = it } != null) {
+                errorMessage.append(eLine)
+            }
+            bufferedReader.close()
+        }
+        return ErrorDescription(
+            rawMessage = response.raw().toString(),
+            body = response.body().toString(),
+            bodyError = errorMessage.toString()
+        )
     }
 
     //RiskField begins
@@ -235,3 +269,4 @@ open class Pangea private constructor() : RxBeaconOperations {
     //RiskField ends
 
 }
+

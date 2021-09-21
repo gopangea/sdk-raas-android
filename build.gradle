@@ -23,7 +23,11 @@ allprojects {
         jcenter()
     }
 }
-
+configurations {
+    all {
+        exclude group: 'org.json', module: 'json'
+    }
+}
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
