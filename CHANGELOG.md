@@ -8,7 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - No changes comming
 
-## [1.0.2] - 2020-02-25
+
+## [1.0.3] - 2021-09-21
+
+### Changed
+
+- An enhanced error descriptor with tree optionals:raw, body, and bodyError.
+
+This has been implemented to give you more info to help you out to debug a possible error request when you invoke these 2 methods:
+
+```
+createToken(card: CardInformation, callBack: CallBack<TokenResponse>) 
+getClientData(callback :CallBack<String>)
+```
+
+## [1.0.2] - 2021-02-25
 ### Added
 - A new method that will return a base64 encoded string which the RaaS partner will store in their database instead of the clientSessionId
 ```

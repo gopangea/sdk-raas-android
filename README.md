@@ -221,7 +221,16 @@ pangea.getClientData(object :CallBack<String>{
     }
 })
 ```
+### Error handling
 
+From version 1.0.3 we introduced an enhanced error descriptor with tree optionals:raw, body, and bodyError.
+
+It has been implemented to give you more info to help you out to debug a possible error request when you invoke these 2 methods:
+
+```
+createToken(card: CardInformation, callBack: CallBack<TokenResponse>) 
+getClientData(callback :CallBack<String>)
+```
 
 ### FAQs
 
