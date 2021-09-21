@@ -1,7 +1,7 @@
 # SDK-RaaS-Android
 
 **The following guide explains how to install and implement Pangea RaaS' Mobile SDK into your application environment.** 
-- Version number: 1.0.2
+- Version number: 1.0.3
 
 ## [Changelog](https://github.com/gopangea/sdk-raas-android/blob/master/CHANGELOG.md)
 
